@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/thinkphp5/public/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <title>新增teacher表数据</title>
+</head>
+<body class="container">
+<h1 class="bg-success text-center">
+    <br>新 增 用 户<br><br>
+</h1>
+<div class="row">
+    <div class="col-xs-6 col-xs-push-3 bg-info">
+        <div class="clearfix" style="margin-bottom: 20px"></div>
+        <div class="form-group">
+            <form action="insert" method="post">
+                <label for="name" class="control-label">姓名：</label>
+                <input type="text" name="name" class="input form-control" id="name">
+                <div class="clearfix" style="margin-bottom: 10px"></div>
+                <label for="username">用户名：</label>
+                <input type="text" name="username" class="input form-control" id="username">
+                <div class="clearfix" style="margin-bottom: 10px"></div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="sex">性别：</label>
+                        <select name="sex" id="sex" class="form-control">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix" style="margin-bottom: 10px"></div>
+                <label for="email">邮箱：</label>
+                <input type="text" class="input form-control" id="email" name="email">
+                <div class="clearfix" style="margin-bottom: 10px"></div>
+                <button type="submit" class="btn btn-primary">提交<span class="glyphicon glyphicon-ok"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

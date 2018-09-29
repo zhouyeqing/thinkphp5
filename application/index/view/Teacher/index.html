@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>教师表</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/Teacher/index.css">
+</head>
+<body class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered table-hover">
+                <tr class="info">
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>用户名</th>
+                    <th>邮件地址</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                {volist name="teachers" id="teacher" key="key"}
+                <tr>
+                    <td>{$key}</td>
+                    <td>{$teacher->getData('name')}</td>
+                    <td>{eq name='$teacher->getData("sex")' value='0'}男{else /}女{/eq}</td>
+                    <td>{$teacher->getData('username')}</td>
+                    <td>{$teacher->getData('email')}</td>
+                    <td>{$teacher->getData('create_time')}</td>
+                    <td>{$teacher->getData('update_time')}</td>
+                    <td><a href="{:url('delete?id='.$teacher->getData('id'))}">删除</a></td>
+                </tr>
+                {/volist}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
