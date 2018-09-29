@@ -28,9 +28,9 @@ class TeacherController extends Controller {
         $Teacher->email = $postData['email'];
         $result = $Teacher->validate(true)->save($Teacher->getData());
         if ($result === false) {
-            return '新增失败'.$Teacher->getError();
+            return $this->error('新增失败'.$Teacher->getError());
         } else {
-            return '新增成功,新增id为：'.$Teacher->id;
+            return $this->success('新增成功，新增户id为'.$Teacher['id'],'index');
         }
     }
     public function add () {
@@ -51,10 +51,28 @@ class TeacherController extends Controller {
             return $this->error('删除失败'.$Teacher->getError());
         }
         return $this->success('删除成功',url('index'));
-
         //   第二种方法
     //    $state = Teacher::destroy(10);
     //    return '删除记录数为：' . $state;
     }
-
+    public function edit () {
+        $id = Request::instance()->param('id/d');
+        $Teacher = Teacher::get($id);
+        if (is_null($Teacher)) {
+            return $this->error('id:'.$id.'不存在');
+        }
+        $this->assign('Teacher',$Teacher);
+        $htmls = $this->fetch();
+        return $htmls;
+    }
+    public function update () {
+        $teacher = Request::instance()->post();
+        $Teacher = new Teacher();
+        $result = $Teacher->validate(true)->isUpdate(true)->save($teacher);
+        if (false === $result) {
+            $this->error('修改失败：'.$Teacher->getError());
+        } else {
+            $this->success('修改成功',url('index'));
+        }
+    }
 }

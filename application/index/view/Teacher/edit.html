@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编 辑 教 师</title>
+</head>
+<body class="container">
+<div class="row">
+    <div class="col-xs-12">
+        <form action="{:url('update')}" method="post">
+            <label for="name">姓名：</label>
+            <input type="hidden" value="{$Teacher->getData('id')}" name="id">
+            <input type="text" id="name" value="{$Teacher->getData('name')}" class="input" name="name">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" value="{$Teacher->getData('username')}" class="input" name="username">
+            <label for="sex">性别：</label>
+            <select name="sex" id="sex">
+                <option value="0">男</option>
+                <option value="1" {eq name="Teacher->getData('sex')" value="1"}selected="selected"{/eq}>女</option>
+            </select>
+            <label for="email">邮箱：</label>
+            <input type="text" name="email" class="input" id="email" value="{$Teacher->getData('email')}">
+            <button type="submit" class="btn btn-primary">保存</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
