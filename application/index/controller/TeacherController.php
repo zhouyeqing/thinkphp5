@@ -13,8 +13,14 @@ use traits\think\Instance;
 
 class TeacherController extends Controller {
     public function index () {
+        $name = Request::instance()->get('name');
+        $pageSize = 5;
         $Teacher = new Teacher();
-        $teachers = $Teacher->select();
+        //$teachers = $Teacher->select();
+        if (!empty($name)) {
+            $Teacher->where('name','like','%'.$name.'%');
+        }
+        $teachers = $Teacher->paginate($pageSize,false,['query'=>['name'=>$name]]);
         $this->assign('teachers',$teachers);
         $htmls = $this->fetch();
         return $htmls;
