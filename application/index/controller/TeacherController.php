@@ -6,17 +6,14 @@
  * Time: 15:04
  */
 namespace app\index\controller;
-use think\Controller;
 use think\Request;
 use app\common\model\Teacher;
-use traits\think\Instance;
 
-class TeacherController extends Controller {
+class TeacherController extends IndexController {
     public function index () {
         $name = Request::instance()->get('name');
         $pageSize = 5;
         $Teacher = new Teacher();
-        //$teachers = $Teacher->select();
         if (!empty($name)) {
             $Teacher->where('name','like','%'.$name.'%');
         }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/thinkphp5/public/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <title>班 级 表</title>
+</head>
+<body class="container">
+<h1 class="text-center text-info">班 级 表</h1>
+<div class="row">
+    <div class="col-xs-8 col-xs-push-2">
+        <table class="table table-bordered table-hover">
+            <tr class="info">
+                <th>序号</th>
+                <th>班级名称</th>
+                <th>辅导员</th>
+                <th>创建时间</th>
+                <th>修改时间</th>
+            </tr>
+            {volist name="klasses" id="_Klass" key="key"}
+            <tr>
+                <td>{$key}</td>
+                <td>{$_Klass->getData('name')}</td>
+                <td>{$_Klass->getTeacher()->getData('name')}</td>
+                <td>{:date("Y-m-d H-i-s",$_Klass->getData('create_time'))}</td>
+                <td>{:date("Y-m-d H-i-s",$_Klass->getData('update_time'))}</td>
+            </tr>
+            {/volist}
+        </table>
+    </div>
+    <div class="col-xs-3">
+        {$klasses->render()}
+    </div>
+</div>
+</body>
+</html>
