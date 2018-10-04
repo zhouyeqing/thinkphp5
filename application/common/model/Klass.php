@@ -9,13 +9,14 @@ namespace app\common\model;
 use app\index\controller\IndexController;
 use think\Model;
 class Klass extends Model {
+    protected $Teacher;
     public function getTeacher () {   //班级表中获取当前老师对象
-        $teacherId = $this->getData('teacher_id');
-        $Teacher = Teacher::get($teacherId);
-        if ($Teacher === null) {   //防止报错
-            $temp = new IndexController();
-            return $temp;
+        if (is_null($this->Teacher)) {
+            $teacherId = $this->getData('teacher_id');
+            $this->Teacher = Teacher::get($teacherId);
+            return $this->Teacher;
+        } else {
+            return $this->Teacher;
         }
-        return $Teacher;
     }
 }

@@ -22,7 +22,7 @@ class TeacherController extends IndexController {
         $htmls = $this->fetch();
         return $htmls;
     }
-    public function insert () {
+    public function save () {
         $postData = Request::instance()->post();
         $Teacher = new Teacher();
         $Teacher->name = $postData['name'];
@@ -31,9 +31,9 @@ class TeacherController extends IndexController {
         $Teacher->email = $postData['email'];
         $result = $Teacher->validate(true)->save($Teacher->getData());
         if ($result === false) {
-            return $this->error('新增失败'.$Teacher->getError());
+            return $this->error('新增失败：'.$Teacher->getError());
         } else {
-            return $this->success('新增成功，新增户id为'.$Teacher['id'],'index');
+            return $this->success('新增成功，新增户id为'.$Teacher->getData('id'),url('index'));
         }
     }
     public function add () {
@@ -51,7 +51,7 @@ class TeacherController extends IndexController {
             return $this->error('不存在id为'.$id.'的教师，删除失败');
         }
         if (!$Teacher->delete()) {
-            return $this->error('删除失败'.$Teacher->getError());
+            return $this->error('删除失败：'.$Teacher->getError());
         }
         return $this->success('删除成功',url('index'));
         //   第二种方法
@@ -73,9 +73,9 @@ class TeacherController extends IndexController {
         $Teacher = new Teacher();
         $result = $Teacher->validate(true)->isUpdate(true)->save($teacher);
         if (false === $result) {
-            $this->error('修改失败：'.$Teacher->getError());
+            return $this->error('修改失败：'.$Teacher->getError());
         } else {
-            $this->success('修改成功',url('index'));
+            return $this->success('修改成功',url('index'));
         }
     }
 }

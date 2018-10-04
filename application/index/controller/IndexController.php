@@ -13,7 +13,4 @@ class IndexController extends Controller {
             return $this->error('你还未登陆，请先登陆！',url('Login/index'));
         }
     }
-    public function getData () {   //测试，用于Klass页面获取teacher信息不存在时不报错
-        return '无辅导员';
-    }
 }

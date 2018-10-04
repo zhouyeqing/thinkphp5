@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/thinkphp5/public/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <title>新 增 班 级</title>
+</head>
+<body class="container">
+<h1 class="bg-success text-center">
+    <br>新 增 班 级<br><br>
+</h1>
+<div class="row">
+    <div class="col-xs-6 col-xs-push-3 bg-info">
+        <div class="clearfix" style="margin-bottom: 20px"></div>
+        <form action="{:url('save')}" method="post">
+            <label for="name" class="control-label" style="font-size: 20px">课程名字:</label>
+            <div class="clearfix" style="margin-bottom: 10px"></div>
+            <input type="text" name="name" id="name" class="input form-control">
+            <div class="clearfix" style="margin-bottom: 20px"></div>
+            <label for="teacher_id" class="control-label" style="font-size: 20px">辅导员:</label>
+            <div class="clearfix" style="margin-bottom: 10px"></div>
+            <select name="teacher_id" id="teacher_id" class="form-control">
+                {volist name='teachers' id='teacher'}
+                <option value="{$teacher->getData('id')}">{$teacher->getData('name')}</option>
+                {/volist}
+            </select>
+            <div class="clearfix" style="margin-bottom: 20px"></div>
+            <button type="submit" class="btn btn-success btn-lg">保存</button>
+            <div class="clearfix" style="margin-bottom: 20px"></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
