@@ -11,6 +11,9 @@ use think\Request;
 use app\common\model\Teacher;
 class LoginController extends Controller{
     public function index () {   //显示登陆表单页面
+        if (Teacher::isLogin()) {
+            $this->success('你已经登陆，将跳转至首页',url('teacher/index'),'',3);
+        }
         $htmls = $this->fetch();
         return $htmls;
     }

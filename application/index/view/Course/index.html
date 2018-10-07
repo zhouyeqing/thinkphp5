@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/thinkphp5/public/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <title>班 级 表</title>
+    <title>课 程 表</title>
 </head>
 <body class="container">
 <div class="row">
@@ -20,8 +20,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{:url('teacher/index')}">教师管理</a></li>
                         <li><a href="{:url('student/index')}">学生管理</a></li>
-                        <li class="active"><a href="{:url('klass/index')}">班级管理</a></li>
-                        <li><a href="{:url('course/index')}">课程管理</a></li>
+                        <li><a href="{:url('klass/index')}">班级管理</a></li>
+                        <li class="active"><a href="{:url('course/index')}">课程管理</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">用户：<span class="text-danger">{:session('teacherName')}</span></a></li>
@@ -32,44 +32,41 @@
         </nav>
     </div>
 </div>
-<h1 class="text-center text-info">班 级 表</h1>
 <div class="clearfix" style="margin-bottom: 10px"></div>
+<h1 class="text-center text-info">课 程 表</h1>
+<div class="clearfix" style="margin-bottom: 10px;"></div>
 <div class="row">
     <div class="col-xs-12">
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover table-bordered">
             <tr class="info">
                 <th>序号</th>
-                <th>班级名称</th>
-                <th>辅导员</th>
-                <th>创建时间</th>
+                <th>名字</th>
+                <th>新增时间</th>
                 <th>修改时间</th>
                 <th>操作</th>
             </tr>
-            {volist name="klasses" id="_Klass" key="key"}
+            {volist name='Courses' id='Course' key='key'}
             <tr>
                 <td>{$key}</td>
-                <td>{$_Klass->getData('name')}</td>
-                <td>{$_Klass->Teacher->name}</td>
-                <td>{:date("Y-m-d H:i:s",$_Klass->getData('create_time'))}</td>
-                <td>{:date("Y-m-d H:i:s",$_Klass->getData('update_time'))}</td>
+                <td>{$Course->name}</td>
+                <td>{:date('Y-m-d H:i:s',$Course->create_time)}</td>
+                <td>{:date('Y-m-d H:i:s',$Course->update_time)}</td>
                 <td class="text-center">
-                    <a href="{:url('edit?id='.$_Klass->getData('id'))}" class="btn btn-warning btn-xs">编辑</a>&nbsp;
-                    <a href="{:url('delete?id='.$_Klass->getData('id'))}" class="btn btn-danger btn-xs">删除</a>
+                    <a href="{:url('edit?id='.$Course->id)}" class="btn btn-warning btn-xs">编辑</a>&nbsp;
+                    <a href="{:url('delete?id='.$Course->id)}" class="btn btn-danger btn-xs">删除</a>
                 </td>
             </tr>
             {/volist}
         </table>
     </div>
-    <div class="clearfix"></div>
-    <div class="col-xs-3">
-        {$klasses->render()}
-    </div>
 </div>
+{$Courses->render()}
 <hr>
 <div class="row">
     <div class="col-xs-2">
-        <a href="{:url('add')}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;新增班级</a>
+        <a href="{:url('add')}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;新增课程</a>
     </div>
 </div>
+
 </body>
 </html>

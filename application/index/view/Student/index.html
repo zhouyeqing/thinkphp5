@@ -5,9 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>教 师 表</title>
     <link rel="stylesheet" href="/thinkphp5/public/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/thinkphp5/public/static/css/Teacher/index.css">
+    <title>学 生 表</title>
 </head>
 <body class="container">
 <div class="row">
@@ -19,8 +18,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{:url('teacher/index')}">教师管理</a></li>
-                        <li><a href="{:url('student/index')}">学生管理</a></li>
+                        <li><a href="{:url('teacher/index')}">教师管理</a></li>
+                        <li class="active"><a href="{:url('student/index')}">学生管理</a></li>
                         <li><a href="{:url('klass/index')}">班级管理</a></li>
                         <li><a href="{:url('course/index')}">课程管理</a></li>
                     </ul>
@@ -33,42 +32,46 @@
         </nav>
     </div>
 </div>
-<div class="clearfix" style="margin-bottom: 10px"></div>
-<h1 class="text-center text-info">教 师 表</h1>
+<div class="clearfix" style="margin-bottom: 20px"></div>
+<h1 class="text-center text-info">学 生 表</h1>
 <div class="clearfix" style="margin-bottom: 10px"></div>
 <div class="row">
-    <div class="col-xs-12" style="height: 230px;">
-        <table class="table table-bordered table-hover">
+    <div class="col-xs-12">
+        <table class="table table-hover table-bordered">
             <tr class="info">
                 <th>序号</th>
                 <th>姓名</th>
+                <th>学号</th>
                 <th>性别</th>
-                <th>用户名</th>
-                <th>邮件地址</th>
+                <th>班级</th>
+                <th>辅导员</th>
+                <th>邮件</th>
                 <th>创建时间</th>
-                <th>更新时间</th>
+                <th>修改时间</th>
                 <th>操作</th>
             </tr>
-            {volist name="teachers" id="_Teacher" key="key"}
+            {volist name='students' id='Student' key='key'}
             <tr>
                 <td>{$key}</td>
-                <td>{$_Teacher->getData('name')}</td>
-                <td>{eq name='$_Teacher->getData("sex")' value='0'}男{else /}女{/eq}</td>
-                <td>{$_Teacher->getData('username')}</td>
-                <td>{$_Teacher->getData('email')}</td>
-                <td>{:date("Y-m-d H:i:s",$_Teacher->getData('create_time'))}</td>
-                <td>{:date("Y-m-d H:i:s",$_Teacher->getData('update_time'))}</td>
-                <td>
-                    <a href="{:url('edit?id='.$_Teacher->getData('id'))}" class="btn btn-warning btn-xs">编辑</a>&nbsp;
-                    <a href="{:url('delete?id='.$_Teacher->getData('id'))}" class="btn btn-danger btn-xs">删除</a>
+                <td>{$Student->getData('name')}</td>
+                <td>{$Student->getData('num')}</td>
+                <td>{$Student->sex}</td>
+                <td>{$Student->Klass->name}</td>
+                <td>{$Student->Klass->Teacher->name}</td>
+                <td>{$Student->getData('email')}</td>
+                <td>{:date('Y-m-d H:i:s',$Student->create_time)}</td>
+                <td>{:date('Y-m-d H:i:s',$Student->update_time)}</td>
+                <td class="text-center">
+                    <a href="{:url('edit?id='.$Student->getData('id'))}" class="btn btn-xs btn-warning">编辑</a>&nbsp;
+                    <a href="{:url('delete?id='.$Student->getData('id'))}" class="btn btn-xs btn-danger">删除</a>
                 </td>
             </tr>
             {/volist}
         </table>
     </div>
-    <div class="clearfix" style="margin-bottom: 20px;"></div>
+    <div class="clearfix"></div>
     <div class="col-xs-3">
-        {$teachers->render()}
+        {$students->render()}
     </div>
     <div class="pull-right" style="margin-right: 10px">
         <div class="clearfix" style="margin-bottom: 20px;"></div>
@@ -84,7 +87,7 @@
 <hr>
 <div class="row">
     <div class="col-xs-2">
-        <a href="{:url('add')}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;新增教师</a>
+        <a href="{:url('add')}" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;新增学生</a>
     </div>
 </div>
 </body>

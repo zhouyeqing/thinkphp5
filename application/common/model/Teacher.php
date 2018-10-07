@@ -28,6 +28,7 @@ class Teacher extends Model {
             return $temp;
         } else {
             session('teacherId',$Teacher->getData('id'));
+            session('teacherName',$Teacher->getData('name'));
             $temp['result'] = true;
             $temp['resultmessage'] = '登陆成功！';
             return $temp;
@@ -45,6 +46,7 @@ class Teacher extends Model {
     }
     static public function logOut () {   //登出
         session('teacherId',null);
+        session('teacherName',null);
         return true;
     }
     static public function isLogin () {   //判断是否登陆
